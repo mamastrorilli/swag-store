@@ -35,7 +35,7 @@ export default async function Footer() {
           </div>
 
           {/* Links */}
-          <div className="flex gap-12 text-sm">
+          <div className="flex gap-12 text-sm flex-wrap">
             <div className="flex flex-col gap-2">
               <span className="font-medium text-white">Shop</span>
               <Link href="/products" className="hover:text-white transition-colors">All Products</Link>

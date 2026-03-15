@@ -8,6 +8,7 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "../ui/navigation-menu";
+import MobileMenu from "./mobile-menu";
 
 export default function Header() {
   return (
@@ -15,27 +16,23 @@ export default function Header() {
       <div className="container mx-auto flex h-14 items-center gap-6 px-4">
         <Link
           href="/"
-          className="flex items-center gap-2 font-semibold text-white"
+          className="flex items-center gap-2 font-semibold text-white text-lg"
         >
-          <Image
-            src="/vercel.svg"
-            alt="Vercel"
-            width={20}
-            height={20}
-            className=""
-          />
+          <Image src="/vercel.svg" alt="Vercel" width={20} height={20} />
           <span className="tracking-tight">Swag Store</span>
         </Link>
 
-        <NavigationMenu className="text-white/80">
+        {/* Desktop nav */}
+        <NavigationMenu viewport={false} className="hidden md:flex">
           <NavigationMenuList>
             <NavigationMenuItem>
-              <NavigationMenuTrigger className="bg-transparent text-white/80 hover:bg-white/10 hover:text-white focus:bg-white/10 data-[active]:bg-white/10 data-[state=open]:bg-white/10">
-                Products
-              </NavigationMenuTrigger>
-              <NavigationMenuContent className="min-w-[160px] bg-black border border-white/10">
+              <NavigationMenuTrigger className="text-base">Products</NavigationMenuTrigger>
+              <NavigationMenuContent>
                 <NavigationMenuLink asChild>
-                  <Link href="/products" className="block whitespace-nowrap px-4 py-3 text-sm text-white/70 hover:text-white transition-colors">
+                  <Link
+                    href="/products"
+                    className="block whitespace-nowrap px-4 py-3 text-sm transition-colors"
+                  >
                     All Products
                   </Link>
                 </NavigationMenuLink>
@@ -43,6 +40,11 @@ export default function Header() {
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
+
+        {/* Mobile hamburger */}
+        <div className="ml-auto md:hidden">
+          <MobileMenu />
+        </div>
       </div>
     </header>
   );
