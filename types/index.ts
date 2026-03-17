@@ -46,3 +46,9 @@ export type ProductStock = {
   inStock: boolean;
   lowStock: boolean;
 };
+
+export type Category = {
+  slug: string;
+  name: string;
+  productCount: number;
+};

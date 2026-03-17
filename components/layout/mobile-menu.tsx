@@ -4,8 +4,9 @@ import Link from "next/link";
 import { useState } from "react";
 import { MenuIcon } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
+import { Category } from "@/types";
 
-export default function MobileMenu() {
+export default function MobileMenu({ categories }: { categories: Category[] }) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -19,14 +20,24 @@ export default function MobileMenu() {
         side="right"
         className="bg-black border-white/10 text-white"
       >
-        <nav className="mt-8 flex flex-col gap-4">
+        <nav className="mt-8 flex flex-col">
           <Link
             href="/products"
-            className="p-4 text-lg text-white/80 hover:text-white transition-colors"
+            className="px-4 py-3 text-sm text-white/60 hover:text-white transition-colors border-b border-white/10"
             onClick={() => setOpen(false)}
           >
             All Products
           </Link>
+          {categories.map((cat) => (
+            <Link
+              key={cat.slug}
+              href={`/products?category=${cat.slug}`}
+              className="px-4 py-3 text-sm text-white/80 hover:text-white transition-colors"
+              onClick={() => setOpen(false)}
+            >
+              {cat.name}
+            </Link>
+          ))}
         </nav>
       </SheetContent>
     </Sheet>
