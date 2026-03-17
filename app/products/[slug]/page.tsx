@@ -22,21 +22,23 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
   const price = (product.price / 100).toFixed(2)
 
   return (
-    <main className="mx-auto px-4 py-10">
-      <div className="flex flex-col md:flex-row gap-10">
+    <main className="container mx-auto px-4 py-10">
+      <div className="flex flex-col md:flex-row gap-10 justify-center items-center">
         {/* Colonna sinistra — immagine */}
-        <div className="max-h-[500px] relative flex-1 aspect-square rounded-xl overflow-hidden">
+        <div className="w-fit max-h-[500px] border border-border rounded-xl overflow-hidden">
           <Image
             src={product.images[0]}
             alt={product.name}
-            fill
+            width={500}
+            height={500}
             className="object-contain"
             sizes="(max-width: 768px) 100vw, 50vw"
+            priority
           />
         </div>
 
         {/* Colonna destra — dettagli */}
-        <div className="flex-1 flex flex-col gap-5">
+        <div className="flex flex-col gap-5 max-w-md">
           <Badge variant="secondary" className="self-start capitalize">
             {product.category}
           </Badge>

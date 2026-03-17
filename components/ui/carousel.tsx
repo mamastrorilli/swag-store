@@ -220,6 +220,37 @@ function CarouselNext({
   )
 }
 
+function CarouselDots({ className }: { className?: string }) {
+  const { api } = useCarousel()
+  const [selected, setSelected] = React.useState(0)
+  const [count, setCount] = React.useState(0)
+
+  React.useEffect(() => {
+    if (!api) return
+    setCount(api.scrollSnapList().length)
+    setSelected(api.selectedScrollSnap())
+    api.on('select', () => setSelected(api.selectedScrollSnap()))
+  }, [api])
+
+  if (count <= 1) return null
+
+  return (
+    <div className={cn('flex justify-center gap-1.5 mt-3', className)}>
+      {Array.from({ length: count }).map((_, i) => (
+        <button
+          key={i}
+          onClick={() => api?.scrollTo(i)}
+          className={cn(
+            'h-1.5 rounded-full transition-all duration-300',
+            i === selected ? 'w-6 bg-foreground' : 'w-1.5 bg-foreground/30',
+          )}
+          aria-label={`Go to slide ${i + 1}`}
+        />
+      ))}
+    </div>
+  )
+}
+
 export {
   type CarouselApi,
   Carousel,
@@ -227,5 +258,6 @@ export {
   CarouselItem,
   CarouselPrevious,
   CarouselNext,
+  CarouselDots,
   useCarousel,
 }

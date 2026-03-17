@@ -1,6 +1,7 @@
 import {
   Carousel,
   CarouselContent,
+  CarouselDots,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
@@ -22,8 +23,9 @@ export default function ProductCarousel({ products }: Props) {
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious />
-      <CarouselNext />
+      <CarouselPrevious className="hidden lg:flex" />
+      <CarouselNext className="hidden lg:flex" />
+      <CarouselDots className="lg:hidden" />
     </Carousel>
   )
 }

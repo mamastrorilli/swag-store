@@ -13,8 +13,8 @@ export default function HeaderScrollWrapper({ children }: { children: React.Reac
 
   return (
     <div
-      className={`sticky top-0 z-50 transition-shadow duration-300 ${
-        scrolled ? 'shadow-[0_1px_12px_rgba(0,0,0,0.10)]' : ''
+      className={`sticky top-0 z-50 transition-shadow duration-300 bg-white/70 ${
+        scrolled ? 'shadow-[0_1px_12px_rgba(0,0,0,0.10)] backdrop-blur-md' : ''
       }`}
     >
       {children}
