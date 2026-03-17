@@ -3,6 +3,9 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { fetchProductById, fetchProducts } from "@/lib/products";
+import { Product } from "@/types";
+import { ApiError } from "@/lib/fetchVercelApi";
+import NotFound from "./not-found";
 
 export default async function ProductPage({
   params,
@@ -10,7 +13,16 @@ export default async function ProductPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const product = await fetchProductById(slug);
+  let product: Product;
+  try {
+    product = await fetchProductById(slug);
+  } catch (error) {
+    if (error instanceof ApiError && error.status === 404) {
+      return <NotFound />;
+    }
+    throw error;
+  }
+
   const price = (product.price / 100).toFixed(2);
 
   return (
