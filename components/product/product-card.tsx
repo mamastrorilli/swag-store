@@ -6,9 +6,10 @@ import { Badge } from '../ui/badge'
 
 type Props = {
   product: Product
+  priority?: boolean
 }
 
-export default function ProductCard({ product }: Props) {
+export default function ProductCard({ product, priority }: Props) {
   const price = (product.price / 100).toFixed(2)
 
   return (
@@ -19,6 +20,7 @@ export default function ProductCard({ product }: Props) {
             src={product.images[0]}
             alt={product.name}
             fill
+            priority={priority}
             className="object-cover"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
