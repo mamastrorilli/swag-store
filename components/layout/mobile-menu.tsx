@@ -29,7 +29,7 @@ export default function MobileMenu({ categories }: { categories: Category[] }) {
           {categories.map((cat) => (
             <Link
               key={cat.slug}
-              href={`/products?category=${cat.slug}`}
+              href={`/categories/${cat.slug}`}
               className="px-4 py-3 text-sm "
               onClick={() => setOpen(false)}
             >

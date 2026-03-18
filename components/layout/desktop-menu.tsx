@@ -31,7 +31,7 @@ export default function DesktopMenu({ categories }: { categories: Category[] }) 
                 {categories.map((cat) => (
                   <NavigationMenuLink key={cat.slug} asChild>
                     <Link
-                      href={`/products?category=${cat.slug}`}
+                      href={`/categories/${cat.slug}`}
                       className="px-1.5 py-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors rounded-none"
                     >
                       {cat.name}

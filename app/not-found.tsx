@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 
-export default function NotFound() {
+export default function MainNotFound() {
   return (
     <div className="flex flex-col items-center justify-center gap-4 h-full py-20">
       <h1 className="text-2xl font-bold">Page not found.</h1>
