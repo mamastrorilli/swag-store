@@ -1,4 +1,6 @@
 import Link from 'next/link'
+import { Button } from '../ui/button'
+import { ArrowRightIcon } from 'lucide-react'
 
 export default function Hero() {
   return (
@@ -13,12 +15,15 @@ export default function Hero() {
           Premium swag for developers who build with Vercel. From tees to tech gear, represent the
           tools you love.
         </p>
-        <Link
-          href="/products"
-          className="mt-8 inline-flex items-center gap-2 bg-foreground text-background px-5 py-2.5 text-sm font-medium hover:opacity-80 transition-opacity"
-        >
-          Browse All Products →
-        </Link>
+        <Button asChild>
+          <Link
+            href="/products"
+            className="mt-8 inline-flex items-center gap-2 bg-foreground text-background px-5 py-2.5 text-sm font-medium hover:opacity-80 transition-opacity"
+          >
+            Browse All Products
+            <ArrowRightIcon className="size-4" />
+          </Link>
+        </Button>
       </div>
     </section>
   )
