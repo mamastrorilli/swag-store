@@ -3,7 +3,7 @@ import ProductCarousel from '@/components/product/product-carousel'
 import { fetchProducts } from '@/lib/products'
 
 export default async function Home() {
-  const products = await fetchProducts({ featured: true })
+  const { products } = await fetchProducts({ featured: true })
   return (
     <main className="w-full">
       <Hero />

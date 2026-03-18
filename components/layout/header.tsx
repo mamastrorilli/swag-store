@@ -14,13 +14,9 @@ export default async function Header() {
           <Image src="/vercel.svg" className="invert" alt="Vercel" width={20} height={20} />
           <span className="tracking-tight">Swag Store</span>
         </Link>
-
-        {/* Desktop nav */}
         <div className="hidden md:flex">
           <DesktopMenu categories={categories} />
         </div>
-
-        {/* Mobile hamburger */}
         <div className="ml-auto md:hidden">
           <MobileMenu categories={categories} />
         </div>

@@ -17,7 +17,7 @@ export default function DesktopMenu({ categories }: { categories: Category[] }) 
           <NavigationMenuTrigger className="text-sm text-gray-700 bg-transparent hover:bg-gray-100 data-popup-open:bg-gray-100">
             Products
           </NavigationMenuTrigger>
-          <NavigationMenuContent className="!fixed !top-14 !left-0 !right-0 !w-screen !max-w-none !rounded-none !mt-0 border-t border-border shadow-[0_4px_16px_rgba(0,0,0,0.06)] backdrop-blur-md bg-white/70!">
+          <NavigationMenuContent className="!fixed !top-14 !left-0 !right-0 !w-screen !max-w-none !rounded-none !mt-0 border-t border-border shadow-[0_4px_16px_rgba(0,0,0,0.06)] backdrop-blur-md !bg-white/70">
             <div className="container mx-auto px-4 py-6">
               <NavigationMenuLink asChild>
                 <Link

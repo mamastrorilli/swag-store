@@ -2,6 +2,7 @@ export type ProductsParams = {
   featured?: boolean
   category?: string
   limit?: number
+  page?: number
 }
 
 export type Store = {
@@ -38,6 +39,19 @@ export type Product = {
   featured: boolean
   tags: string[]
   createdAt: string
+}
+
+export type MetaPagination = {
+  totalPages: number
+  page: number
+  limit: number
+  total: number
+  hasNextPage: boolean
+  hasPreviousPage: boolean
+}
+
+export type ProductMeta = {
+  pagination: MetaPagination
 }
 
 export type ProductStock = {
