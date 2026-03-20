@@ -38,6 +38,7 @@ export default function RootLayout({
         <HeaderScrollWrapper>
           <Header />
         </HeaderScrollWrapper>
+        <div className="h-14" />
         <div className="flex-grow">
           {children}
           <SpeedInsights />
