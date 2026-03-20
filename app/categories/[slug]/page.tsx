@@ -3,8 +3,7 @@ import { fetchCategories } from '@/lib/categories'
 import { fetchProducts } from '@/lib/products'
 import NotFound from './not-found'
 import MainNotFound from '@/app/not-found'
-import { ProductGrid } from '@/components/product/product-grid'
-import { MetaPagination, Product } from '@/types'
+import { ProductGrid, PRODUCTS_PER_PAGE } from '@/components/product/product-grid'
 
 // Disallow any slug not returned by generateStaticParams — unknown categories return 404
 export const dynamicParams = false
@@ -15,26 +14,32 @@ export async function generateStaticParams() {
   return categories.map((cat) => ({ slug: cat.slug }))
 }
 
-export default async function CategoryPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function CategoryPage({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ slug: string }>
+  searchParams: Promise<{ page?: string }>
+}) {
   const { slug } = await params
-  let categoryProducts: Product[] = []
-  let pagination: MetaPagination | undefined
+  const { page: pageParam } = await searchParams
+  const page = pageParam ? parseInt(pageParam) : 1
   try {
-    const { products, meta } = await fetchProducts({ category: slug, limit: 3 })
-    categoryProducts = products
-    pagination = meta.pagination
+    const categories = await fetchCategories()
+    const category = categories.find((c) => c.slug === slug)
+    const { products, meta: { pagination } } = await fetchProducts({ category: slug, page, limit: PRODUCTS_PER_PAGE })
+    return (
+      <ProductGrid
+        products={products}
+        pagination={pagination}
+        basePath={`/categories/${slug}`}
+        title={category?.name}
+      />
+    )
   } catch (error) {
     if (error instanceof ApiError && error.status === 404) {
       return <NotFound />
-    } else {
-      return <MainNotFound />
     }
+    return <MainNotFound />
   }
-  return (
-    <ProductGrid
-      products={categoryProducts}
-      pagination={pagination}
-      basePath={`/categories/${slug}`}
-    />
-  )
 }

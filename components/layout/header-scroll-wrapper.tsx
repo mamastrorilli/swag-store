@@ -18,10 +18,12 @@ export default function HeaderScrollWrapper({ children }: { children: React.Reac
       }`}
     >
       <div
-        className={`absolute inset-0 -z-10 bg-white/70 transition-all duration-300 ${scrolled ? 'backdrop-blur-md' : ''}`}
+        className={`absolute inset-0 z-0 bg-white/70 transition-all duration-300 ${scrolled ? 'backdrop-blur-md' : ''}`}
         aria-hidden
       />
-      {children}
+      <div className="relative z-10">
+        {children}
+      </div>
     </div>
   )
 }
