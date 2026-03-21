@@ -6,9 +6,6 @@ import MainNotFound from '@/app/not-found'
 import { ProductGrid } from '@/components/product/product-grid'
 import { PRODUCTS_PER_PAGE } from '@/lib/constants'
 
-// Disallow any slug not returned by generateStaticParams — unknown categories return 404
-export const dynamicParams = false
-
 // Pre-generate one page per category at build time
 export async function generateStaticParams() {
   const categories = await fetchCategories()
@@ -28,7 +25,10 @@ export default async function CategoryPage({
   try {
     const categories = await fetchCategories()
     const category = categories.find((c) => c.slug === slug)
-    const { products, meta: { pagination } } = await fetchProducts({ category: slug, page, limit: PRODUCTS_PER_PAGE })
+    const {
+      products,
+      meta: { pagination },
+    } = await fetchProducts({ category: slug, page, limit: PRODUCTS_PER_PAGE })
     return (
       <ProductGrid
         products={products}

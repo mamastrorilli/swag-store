@@ -1,10 +1,13 @@
+'use cache'
+
 import { Category } from '@/types'
 import { fetchVercelApi } from './fetchVercelApi'
+import { cacheLife } from 'next/cache'
 
 export const fetchCategories = async (): Promise<Category[]> => {
-  const response = await fetchVercelApi('/categories', {
-    next: { revalidate: false }, // cache indefinitely — categories don't change between deploys
-  })
+  cacheLife('max')
+
+  const response = await fetchVercelApi('/categories')
   const { data } = await response.json()
   return data
 }

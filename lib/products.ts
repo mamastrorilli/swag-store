@@ -1,9 +1,14 @@
 import { Product, ProductsParams, ProductStock, ProductMeta } from '@/types'
 import { fetchVercelApi } from './fetchVercelApi'
+import { cacheLife, cacheTag } from 'next/cache'
 
 export const fetchProducts: (
   params?: ProductsParams,
 ) => Promise<{ products: Product[]; meta: ProductMeta }> = async (params) => {
+  'use cache'
+  cacheLife('minutes')
+  cacheTag('products')
+
   const query = new URLSearchParams()
   if (params?.featured !== undefined) query.append('featured', String(params.featured))
   if (params?.category) query.append('category', params.category)
@@ -11,21 +16,17 @@ export const fetchProducts: (
   if (params?.page !== undefined) query.append('page', String(params.page))
 
   const qs = query.toString()
-  const response = await fetchVercelApi(qs ? `/products?${qs}` : '/products', {
-    next: {
-      revalidate: 3600, // 1 hour
-    },
-  })
+  const response = await fetchVercelApi(qs ? `/products?${qs}` : '/products')
   const { data, meta } = await response.json()
   return { products: data, meta }
 }
 
 export const fetchProductById: (id: string) => Promise<Product> = async (id) => {
-  const response = await fetchVercelApi(`/products/${id}`, {
-    next: {
-      revalidate: 600,
-    },
-  })
+  'use cache'
+  cacheLife('minutes')
+  cacheTag(`product-${id}`)
+
+  const response = await fetchVercelApi(`/products/${id}`)
   const { data } = await response.json()
   return data
 }

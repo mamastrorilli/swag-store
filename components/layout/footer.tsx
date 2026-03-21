@@ -3,8 +3,11 @@ import Link from 'next/link'
 import { Separator } from '../ui/separator'
 import { Badge } from '../ui/badge'
 import { fetchStore } from '@/lib/store'
+import { cacheLife } from 'next/cache'
 
 export default async function Footer() {
+  'use cache'
+  cacheLife('days')
   const store = await fetchStore()
 
   return (
