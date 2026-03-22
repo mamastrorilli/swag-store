@@ -1,7 +1,8 @@
 'use client'
 
 import Link from 'next/link'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { usePathname } from 'next/navigation'
 import { MenuIcon } from 'lucide-react'
 import { Sheet, SheetContent, SheetTrigger } from '../ui/sheet'
 import { Category } from '@/types'
@@ -10,6 +11,11 @@ import { VisuallyHidden } from 'radix-ui'
 
 export default function MobileMenu({ categories }: { categories: Category[] }) {
   const [open, setOpen] = useState(false)
+  const pathname = usePathname()
+
+  useEffect(() => {
+    setOpen(false)
+  }, [pathname])
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
@@ -23,7 +29,7 @@ export default function MobileMenu({ categories }: { categories: Category[] }) {
           <DialogTitle>Menu</DialogTitle>
         </VisuallyHidden.Root>
         <nav className="mt-8 flex flex-col">
-          <Link href="/products" className="px-4 py-3 text-sm " onClick={() => setOpen(false)}>
+          <Link href="/products" className="px-4 py-3 text-sm ">
             All Products
           </Link>
           {categories.map((cat) => (
@@ -31,7 +37,6 @@ export default function MobileMenu({ categories }: { categories: Category[] }) {
               key={cat.slug}
               href={`/categories/${cat.slug}`}
               className="px-4 py-3 text-sm "
-              onClick={() => setOpen(false)}
             >
               {cat.name}
             </Link>
