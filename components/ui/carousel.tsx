@@ -91,7 +91,6 @@ function Carousel({
     setApi(api)
   }, [api, setApi])
 
-
   React.useEffect(() => {
     if (!api) return
     onSelect(api)
@@ -134,7 +133,7 @@ function CarouselContent({ className, ...props }: React.ComponentProps<'div'>) {
   const { carouselRef, orientation } = useCarousel()
 
   return (
-    <div ref={carouselRef} className="overflow-x-clip px-1" data-slot="carousel-content">
+    <div ref={carouselRef} className="overflow-x-clip px-2" data-slot="carousel-content">
       <div
         className={cn('flex', orientation === 'horizontal' ? '-ml-4' : '-mt-4 flex-col', className)}
         {...props}
@@ -182,7 +181,11 @@ function CarouselPrevious({
         data-slot="carousel-previous"
         variant={variant}
         size={size}
-        className={cn('touch-manipulation rounded-full', orientation === 'vertical' && 'rotate-90', className)}
+        className={cn(
+          'touch-manipulation rounded-full',
+          orientation === 'vertical' && 'rotate-90',
+          className,
+        )}
         disabled={!canScrollPrev}
         onClick={scrollPrev}
         {...props}
@@ -215,7 +218,11 @@ function CarouselNext({
         data-slot="carousel-next"
         variant={variant}
         size={size}
-        className={cn('touch-manipulation rounded-full', orientation === 'vertical' && 'rotate-90', className)}
+        className={cn(
+          'touch-manipulation rounded-full',
+          orientation === 'vertical' && 'rotate-90',
+          className,
+        )}
         disabled={!canScrollNext}
         onClick={scrollNext}
         {...props}

@@ -21,7 +21,7 @@ export default function Hero() {
       <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-transparent" />
 
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-4 lg:px-16 h-full flex items-center absolute inset-0">
+      <div className="z-10 container mx-auto px-4 lg:px-16 h-full flex items-center absolute inset-0">
         <div className="max-w-2xl space-y-3 md:space-y-6">
           <p className="text-[10px] md:text-xs uppercase tracking-[0.3em] text-white/50 font-mono">
             Developer Swag Store
