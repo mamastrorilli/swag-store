@@ -16,7 +16,10 @@ export default async function ProductsPage({
   const params = await searchParams
   const page = params?.page ? parseInt(params.page) : 1
 
-  const { products, meta: { pagination } } = await fetchProducts({ page, limit: PRODUCTS_PER_PAGE })
+  const {
+    products,
+    meta: { pagination },
+  } = await fetchProducts({ page, limit: PRODUCTS_PER_PAGE })
 
   return <ProductGrid products={products} pagination={pagination} title="All Products" />
 }

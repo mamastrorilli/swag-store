@@ -30,13 +30,13 @@ export default async function Footer() {
           <div className="flex gap-12 text-sm flex-wrap">
             <div className="flex flex-col gap-2">
               <span className="font-medium text-gray-900">Follow us</span>
-              <Link href={store.socialLinks.twitter} className="hover:text-white transition-colors">
+              <Link href={store.socialLinks.twitter} className="hover:text-gray-900 transition-colors">
                 Twitter
               </Link>
-              <Link href={store.socialLinks.github} className="hover:text-white transition-colors">
+              <Link href={store.socialLinks.github} className="hover:text-gray-900 transition-colors">
                 GitHub
               </Link>
-              <Link href={store.socialLinks.discord} className="hover:text-white transition-colors">
+              <Link href={store.socialLinks.discord} className="hover:text-gray-900 transition-colors">
                 Discord
               </Link>
             </div>

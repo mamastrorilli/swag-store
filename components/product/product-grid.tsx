@@ -50,7 +50,7 @@ export const ProductGrid = ({
         {paginationContent}
       </div>
       <div
-        className={`grid grid-cols-2 md:grid-cols-3 gap-6 m-10 min-h-[1000px] transition-opacity duration-200 ${isPending ? 'opacity-50 pointer-events-none' : ''}`}
+        className={`grid grid-cols-2 md:grid-cols-3 gap-6 m-10 min-h-[800px] md:min-h-[650px] lg:min-h-[1000px] transition-opacity duration-200 ${isPending ? 'opacity-50 pointer-events-none' : ''}`}
       >
         {products.map((product, index) => (
           <div key={product.id}>
