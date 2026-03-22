@@ -1,9 +1,9 @@
 import Hero from '@/components/layout/hero'
-import ProductCarousel from '@/components/product/product-carousel'
-import { fetchProducts } from '@/lib/products'
+import HomepageCarousel from '@/components/product/homepage-carousel'
+import { ProductCarouselSkeleton } from '@/components/product/product-carousel.skeleton'
+import { Suspense } from 'react'
 
 export default async function Home() {
-  const { products } = await fetchProducts({ featured: true })
   return (
     <main className="w-full">
       <Hero />
@@ -11,7 +11,9 @@ export default async function Home() {
         <h2 className="text-sm uppercase tracking-widest text-muted-foreground font-mono mb-8">
           Featured Products
         </h2>
-        <ProductCarousel products={products} />
+        <Suspense fallback={<ProductCarouselSkeleton />}>
+          <HomepageCarousel />
+        </Suspense>
       </section>
     </main>
   )
