@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
 import Header from '@/components/layout/header'
-import HeaderScrollWrapper from '@/components/layout/header-scroll-wrapper'
+import HeaderScrollBackground from '@/components/layout/header-scroll-wrapper'
 import Footer from '@/components/layout/footer'
 import { fetchStore } from '@/lib/store'
 import { SpeedInsights } from '@vercel/speed-insights/next'
@@ -35,9 +35,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}
       >
-        <HeaderScrollWrapper>
-          <Header />
-        </HeaderScrollWrapper>
+        <div className="fixed top-0 inset-x-0 z-50">
+          <HeaderScrollBackground />
+          <div className="relative z-10">
+            <Header />
+          </div>
+        </div>
         <div className="h-14" />
         <div className="flex-grow">
           {children}

@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from 'react'
 
-export default function HeaderScrollWrapper({ children }: { children: React.ReactNode }) {
+// Same level of Header, not a wrapper to keep the component tree consistent
+export default function HeaderScrollBackground() {
   const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
@@ -13,19 +14,10 @@ export default function HeaderScrollWrapper({ children }: { children: React.Reac
 
   return (
     <div
-      className={`fixed top-0 inset-x-0 z-50 transition-shadow duration-300 ${
-        scrolled ? 'shadow-[0_1px_12px_rgba(0,0,0,0.10)]' : ''
+      className={`absolute inset-0 z-0 bg-white/70 transition-[backdrop-filter,box-shadow] duration-300 ${
+        scrolled ? 'backdrop-blur-md shadow-[0_1px_12px_rgba(0,0,0,0.10)]' : ''
       }`}
-    >
-      <div
-        className={`absolute inset-0 z-0 bg-white/70 transition-[backdrop-filter] duration-300 ${
-          scrolled ? 'backdrop-blur-md' : ''
-        }`}
-        aria-hidden
-      />
-      <div className="relative z-10">
-        {children}
-      </div>
-    </div>
+      aria-hidden
+    />
   )
 }
