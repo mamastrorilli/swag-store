@@ -13,7 +13,7 @@ import Link from 'next/link'
 
 export default function DesktopMenu({ categories }: { categories: Category[] }) {
   return (
-    <NavigationMenu viewport={false}>
+    <NavigationMenu id="desktop-nav" viewport={false}>
       <NavigationMenuList>
         <NavigationMenuItem>
           <NavigationMenuTrigger className="text-sm text-gray-700 bg-transparent hover:bg-gray-100 data-popup-open:bg-gray-100">

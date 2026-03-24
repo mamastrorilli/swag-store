@@ -6,6 +6,7 @@ import HeaderScrollBackground from '@/components/layout/header-scroll-wrapper'
 import Footer from '@/components/layout/footer'
 import { fetchStore } from '@/lib/store'
 import { SpeedInsights } from '@vercel/speed-insights/next'
+import { CartProvider } from '@/components/cart/cart-context'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -35,17 +36,19 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}
       >
-        <div className="fixed top-0 inset-x-0 z-50">
-          <HeaderScrollBackground />
-          <div className="relative z-10">
-            <Header />
+        <CartProvider>
+          <div className="fixed top-0 inset-x-0 z-50">
+            <HeaderScrollBackground />
+            <div className="relative z-10">
+              <Header />
+            </div>
           </div>
-        </div>
-        <div className="h-14" />
-        <div className="flex-grow">
-          {children}
-          <SpeedInsights />
-        </div>
+          <div className="h-14" />
+          <div className="flex-grow">
+            {children}
+            <SpeedInsights />
+          </div>
+        </CartProvider>
         <Footer />
       </body>
     </html>
