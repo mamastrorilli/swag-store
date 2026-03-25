@@ -42,6 +42,30 @@ export async function getCart(token: string): Promise<Cart> {
   return data
 }
 
+export async function updateItemInCart(token: string, productId: string, quantity: number): Promise<Cart> {
+  const response = await fetchVercelApi(`/cart/${productId}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-cart-token': token,
+    },
+    body: JSON.stringify({ quantity }),
+  })
+  const { data } = await response.json()
+  return data
+}
+
+export async function removeItemFromCart(token: string, productId: string): Promise<Cart> {
+  const response = await fetchVercelApi(`/cart/${productId}`, {
+    method: 'DELETE',
+    headers: {
+      'x-cart-token': token,
+    },
+  })
+  const { data } = await response.json()
+  return data
+}
+
 export async function addItemToCart(token: string, productId: string, quantity = 1): Promise<Cart> {
   const response = await fetchVercelApi('/cart', {
     method: 'POST',

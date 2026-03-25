@@ -10,7 +10,7 @@ export const AddToCartSection = async ({ product }: { product: Product }) => {
     <>
       <div className="gap-5 flex flex-col">
         <StockIndicator inStock={inStock} lowStock={lowStock} stock={stock} />
-        <AddToCartButton productId={product.id} inStock={inStock} />
+        <AddToCartButton productId={product.id} inStock={inStock} stock={stock} />
       </div>
     </>
   )

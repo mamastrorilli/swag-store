@@ -11,7 +11,9 @@ export const CartContext = createContext<{
   token: string | null
   openCart: () => void
   closeCart: () => void
-  addItem: (productId: string) => Promise<boolean>
+  addItem: (productId: string, quantity?: number) => Promise<boolean>
+  removeItem: (productId: string) => Promise<void>
+  updateItem: (productId: string, quantity: number) => Promise<void>
 }>({
   cart: null,
   isOpen: false,
@@ -19,6 +21,8 @@ export const CartContext = createContext<{
   openCart: () => {},
   closeCart: () => {},
   addItem: async () => false,
+  removeItem: async () => {},
+  updateItem: async () => {},
 })
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
@@ -47,7 +51,39 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     setIsOpen(false)
   }
 
-  async function addItem(productId: string): Promise<boolean> {
+  async function updateItem(productId: string, quantity: number): Promise<void> {
+    if (!token) return
+    try {
+      const res = await fetch('/api/cart', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json', 'x-cart-token': token },
+        body: JSON.stringify({ productId, quantity }),
+      })
+      const updatedCart = await res.json()
+      setCart(updatedCart)
+    } catch (error) {
+      toast.error('Failed to update item quantity')
+      console.error('Update cart error:', error)
+    }
+  }
+
+  async function removeItem(productId: string): Promise<void> {
+    if (!token) return
+    try {
+      const res = await fetch('/api/cart', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json', 'x-cart-token': token },
+        body: JSON.stringify({ productId }),
+      })
+      const updatedCart = await res.json()
+      setCart(updatedCart)
+    } catch (error) {
+      toast.error('Failed to remove item from cart')
+      console.error('Remove from cart error:', error)
+    }
+  }
+
+  async function addItem(productId: string, quantity = 1): Promise<boolean> {
     let currentToken = token
     try {
       if (!currentToken) {
@@ -64,7 +100,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
           'Content-Type': 'application/json',
           'x-cart-token': currentToken || '',
         },
-        body: JSON.stringify({ productId, quantity: 1 }),
+        body: JSON.stringify({ productId, quantity }),
       })
       const updatedCartResponse = await addToCartResponse.json()
 
@@ -83,7 +119,9 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <CartContext.Provider value={{ cart, isOpen, token, openCart, closeCart, addItem }}>
+    <CartContext.Provider
+      value={{ cart, isOpen, token, openCart, closeCart, addItem, removeItem, updateItem }}
+    >
       {children}
       <MiniCartDrawer />
     </CartContext.Provider>

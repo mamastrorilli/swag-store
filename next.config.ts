@@ -8,6 +8,7 @@ const nextConfig: NextConfig = {
         hostname: 'i8qy5y6gxkdgdcv9.public.blob.vercel-storage.com',
       },
     ],
+    qualities: [75, 90],
   },
   experimental: { cacheComponents: true },
 }
