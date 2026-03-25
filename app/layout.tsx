@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { DM_Sans } from 'next/font/google'
 import './globals.css'
 import Header from '@/components/layout/header'
 import HeaderScrollBackground from '@/components/layout/header-scroll-wrapper'
@@ -9,13 +9,8 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 import { CartProvider } from '@/components/cart/cart-context'
 import { Toaster } from '@/components/ui/sonner'
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-})
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
+const dmSans = DM_Sans({
+  variable: '--font-dm-sans',
   subsets: ['latin'],
 })
 
@@ -35,7 +30,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}
+        className={`${dmSans.variable} antialiased flex flex-col min-h-screen`}
       >
         <CartProvider>
           <div className="fixed top-0 inset-x-0 z-50">
