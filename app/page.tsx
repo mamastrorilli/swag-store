@@ -13,10 +13,12 @@ export const metadata: Metadata = {
 import HomepageCarousel from '@/components/product/homepage-carousel'
 import { ProductCarouselSkeleton } from '@/components/product/product-carousel.skeleton'
 import { Suspense } from 'react'
+import { Analytics } from '@vercel/analytics/next'
 
 export default async function Home() {
   return (
     <main className="w-full">
+      <Analytics />
       <Hero />
       <section className="md:px-0 lg:px-16 py-16">
         <h2 className="flex justify-center text-sm uppercase tracking-widest text-muted-foreground font-mono mb-8">
